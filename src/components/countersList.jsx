@@ -12,25 +12,30 @@ const CountersList = () => {
     const [counters, setCounters] = useState(initialState);
 
     const handleDelete= (id) => {
-        console.log("Delete", id);
         const newCounters = counters.filter(c=> c.id !== id);
         setCounters(newCounters);
     };
 
-    const handleReset = () => {
-        setCounters(initialState);
-    };
-
     const handleIncrement = (id) => {
-        counters[id].value += 1;
-        const newCounter = counters.map(c=>c);
-        setCounters(newCounter);
-    };
+    const newCounters = counters.map(c => {
+			if (c.id !== id) return c;
+			c.value += 1;
+			return c;
+		});
+		setCounters(newCounters);
+};
 
     const handleDecrement = (id) => {
-        counters[id].value -= 1;
-        const newCounter = counters.map(c=>c);
-        setCounters(newCounter);
+    const newCounters = counters.map(c => {
+			if (c.id !== id) return c;
+			c.value -= 1;
+			return c;
+		});
+		setCounters(newCounters);
+};
+
+    const handleReset = () => {
+        setCounters(initialState);
     };
 
     return (
